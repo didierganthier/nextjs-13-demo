@@ -8,7 +8,11 @@ type PageProps = {
 }
 
 const fetchTodo = async (todoId: string) => {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`);
+    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
+        next: {
+            revalidate: 60,
+        }
+    });
     const todo: Todo = await res.json();
     return todo;
 }
